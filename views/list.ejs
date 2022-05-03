@@ -1,0 +1,42 @@
+<!-- EJS template -->
+<!-- write html code -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To DO list</title>
+    <link rel="stylesheet" type="text/css" href="css/styles.css" >
+    <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="box" id="heading">
+<h1> <%= listTitle %> </h1>
+</div>
+
+<div class="box">
+    <!-- add item in console log to web page: -->
+    <% for (var i=0; i<newlistitems.length ; i++){ %>
+        <div class="item">
+    
+     <input type="checkbox" class="checks">
+     <label><b><%= newlistitems[i] %></b></label>
+        
+    </div>
+    <% } %>
+    
+    <div class="last_child">
+        <form  action="/" method="post"> 
+            <input type="text" name="newitems" placeholder="New Item" autocomplete="off">
+            <button type="submit" name="list" value="<%=  listTitle %>" class="button-50"  > ADD </button>
+        
+        </form>
+    </div>
+
+</body>
+</html>
