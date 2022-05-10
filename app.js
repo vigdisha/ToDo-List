@@ -1,11 +1,14 @@
 const {response} = require ("express");
 const express = require("express");
 const https = require("https");
+const date = require(__dirname +"/date.js")
+
+
 const app = express();
 let items = ["Wake Up", "Take a Bath", "Drink Water"];
 let workItems = [];
 //Express templates
-app.set('view engine', 'ejs'); 
+app.set('view engine', 'ejs');          
 
 //Body parser
 app.use(express.urlencoded({extended : true}));
@@ -15,25 +18,14 @@ app.use(express.static(__dirname + "/public"));
 
 
 app.get("/", function(request, response){
-//check if day is weekend
-   let today =  new Date();
-//    var dayIndex  = date.getDay();
-//    const dayList  =["sunday", "monday" , "tuesday" , "wednesday", "thursday", "friday", "saturday"];
-//    var day = dayList[dayIndex];
- 
-let options ={
-weekday: "long",
-day: "numeric",
-month : "long"
-}
-
-let day = today.toLocaleDateString("en-US", options);
-
+    //calling the function from the date.js file
+let day = date.getDate();
     response.render("list", {listTitle: day, newlistitems :items});
 });
 
 app.post("/", function(req, res){
     let item = req.body.newitems;
+    // to seperate the data from both the lists:
     if(req.body.list === "Work List"){
     workItems.push(item);
     res.redirect("/work");
@@ -53,10 +45,8 @@ app.get("/work", function(req, res){
 //     let item = req.bosy.newitems;
 //     workItems.push(item);
 //     res.redirect("/work");
-
-
 // });
-              
+           
 
 app.listen(3000, function(){
     console.log("running on port 3000");
