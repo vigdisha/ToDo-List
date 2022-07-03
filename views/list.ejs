@@ -13,23 +13,30 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
 </head>
-
 <body>
     <div class="box" id="heading">
 <h1> <%= listTitle %> </h1>
 </div>
 
+
 <div class="box">
-    <!-- add item in console log to web page: -->
-    <% for (var i=0; i<newlistitems.length ; i++){ %>
-        <div class="item">
+
+    <!-- delete item in console log to web page: -->
+<% newlistitems.forEach(function(item){ %>
+    <form action="/delete" method="post">
+    <div class  ="item">
     
-     <input type="checkbox" class="checks">
-     <label><b><%= newlistitems[i] %></b></label>
-        
+    <input type="checkbox" class="checks" name="checkbox" value="<%= item._id%>" onchange="this.form.submit()">
+    <label><b><%= item.name %></b></label>
+
     </div>
-    <% } %>
+    <input type="hidden" name="listName" value="<%= listTitle %>"> </input>
+    </form>
     
+<% }) %>
+
+
+
     <div class="last_child">
         <form  action="/" method="post"> 
             <input type="text" name="newitems" placeholder="New Item" autocomplete="off">
