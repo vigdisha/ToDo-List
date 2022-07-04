@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const _ = require("lodash");
 const { stringify } = require("querystring");
 const { StringDecoder } = require("string_decoder");
-
+// let uri = "mongodb+srv://disha:test123@cluster0.wcbno.mongodb.net/?retryWrites=true&w=majority";
 
 
 const app = express();
@@ -22,7 +22,7 @@ app.use(express.urlencoded({extended : true}));
 app.use(express.static(__dirname + "/public"));
 
 //mongoose:
-mongoose.connect("mongodb://localhost:27017/todolistDB");
+mongoose.connect("mongodb+srv://disha:test123@cluster0.wcbno.mongodb.net/?retryWrites=true");
 const itemsSchema = {
 name: String
 }
@@ -143,9 +143,14 @@ const listName = req.body.listName;
 }
 });
 
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 3000;
+}
+app.listen(port);
 
 app.listen(3000, function(){
-    console.log("running on port 3000");
+    console.log("Successfully running");
 });
 
 
