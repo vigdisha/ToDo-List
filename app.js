@@ -5,8 +5,7 @@ const mongoose = require('mongoose');
 const _ = require("lodash");
 const { stringify } = require("querystring");
 const { StringDecoder } = require("string_decoder");
-// let uri = "mongodb+srv://disha:test123@cluster0.wcbno.mongodb.net/?retryWrites=true&w=majority";
-
+const uri =  process.env.URI;
 
 const app = express();
 // let items = ["Wake Up", "Take a Bath", "Drink Water"];
@@ -22,7 +21,7 @@ app.use(express.urlencoded({extended : true}));
 app.use(express.static(__dirname + "/public"));
 
 //mongoose:
-mongoose.connect("mongodb+srv://disha:test123@cluster0.wcbno.mongodb.net/?retryWrites=true");
+mongoose.connect(uri);
 const itemsSchema = {
 name: String
 }
